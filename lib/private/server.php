@@ -38,7 +38,6 @@ use bantu\IniGetWrapper\IniGetWrapper;
 use OC\AppFramework\Http\Request;
 use OC\AppFramework\Db\Db;
 use OC\AppFramework\Utility\SimpleContainer;
-use OC\Cache\UserCache;
 use OC\Command\AsyncBus;
 use OC\Diagnostics\NullQueryLogger;
 use OC\Diagnostics\EventLogger;
@@ -216,9 +215,6 @@ class Server extends SimpleContainer implements IServerContainer {
 		});
 		$this->registerService('AppHelper', function ($c) {
 			return new \OC\AppHelper();
-		});
-		$this->registerService('UserCache', function ($c) {
-			return new UserCache();
 		});
 		$this->registerService('MemCacheFactory', function (Server $c) {
 			$config = $c->getConfig();
@@ -643,15 +639,6 @@ class Server extends SimpleContainer implements IServerContainer {
 	 */
 	public function getHelper() {
 		return $this->query('AppHelper');
-	}
-
-	/**
-	 * Returns an ICache instance
-	 *
-	 * @return \OCP\ICache
-	 */
-	public function getCache() {
-		return $this->query('UserCache');
 	}
 
 	/**

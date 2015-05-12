@@ -233,14 +233,6 @@ interface IServerContainer {
 	public function getHelper();
 
 	/**
-	 * Returns an ICache instance
-	 *
-	 * @return \OCP\ICache
-	 * @since 6.0.0
-	 */
-	public function getCache();
-
-	/**
 	 * Returns an \OCP\CacheFactory instance
 	 *
 	 * @return \OCP\ICacheFactory
