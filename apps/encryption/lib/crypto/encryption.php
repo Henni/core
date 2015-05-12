@@ -359,6 +359,26 @@ class Encryption implements IEncryptionModule {
 	}
 
 	/**
+	 * check if the encryption module is able to read the file,
+	 * e.g. if all encryption keys exists
+	 *
+	 * @param string $path
+	 * @param string $uid user for whom we want to check if he can read the file
+	 * @return boolean
+	 */
+	public function isReadable($path, $uid) {
+		$fileKey = $this->keyManager->getFileKey($path, $uid);
+		if (empty($fileKey)) {
+			$msg = 'Encryption module "' . $this->getDisplayName() .
+				'" is not able to read this file';
+			$hint = $this->l->t('Can not read this file, probably this is a shared file. Please ask the file owner to reshare the file with you.');
+			throw new DecryptionFailedException($msg, 0, null, $hint);
+		}
+
+		return true;
+	}
+
+	/**
 	 * @param string $path
 	 * @return string
 	 */
