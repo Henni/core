@@ -247,4 +247,22 @@ class Helper {
 		}
 		return $files;
 	}
+
+	/**
+	 * redirect to error page
+	 *
+	 * @param $errorMessage
+	 * @throws \Exception
+	 */
+	public static function redirectToErrorPage($errorMessage) {
+
+		$location = \OC::$server->getURLGenerator()->linkToRoute('files.Download.failed', ['errorMessage' => $errorMessage]);
+
+		if(defined('PHPUNIT_RUN') and PHPUNIT_RUN) {
+			throw new \Exception("Encryption error: $errorMessage");
+		}
+
+		header('Location: ' . $location );
+		exit();
+	}
 }

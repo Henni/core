@@ -49,6 +49,11 @@ $application->registerRoutes(
 				'verb' => 'GET',
 				'requirements' => array('tagName' => '.+'),
 			),
+			array(
+				'name' => 'Download#failed',
+				'url' => '/ajax/downloadFailed',
+				'verb' => 'GET',
+			),
 		)
 	)
 );

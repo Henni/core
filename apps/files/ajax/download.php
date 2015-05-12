@@ -39,4 +39,10 @@ if (!is_array($files_list)) {
 	$files_list = array($files);
 }
 
-OC_Files::get($dir, $files_list, $_SERVER['REQUEST_METHOD'] == 'HEAD');
+try {
+
+	OC_Files::get($dir, $files_list, $_SERVER['REQUEST_METHOD'] == 'HEAD');
+
+} catch (\Exception $ex) {
+	\OCA\Files\Helper::redirectToErrorPage($ex->getMessage());
+}

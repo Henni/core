@@ -25,6 +25,7 @@
 namespace OCA\Files\Appinfo;
 
 use OCA\Files\Controller\ApiController;
+use OCA\Files\Controller\DownloadController;
 use OCP\AppFramework\App;
 use \OCA\Files\Service\TagService;
 use \OCP\IContainer;
@@ -44,6 +45,14 @@ class Application extends App {
 				$c->query('Request'),
 				$c->query('TagService'),
 				$server->getPreviewManager()
+			);
+		});
+
+		$container->registerService('DownloadController', function (IContainer $c) use ($server) {
+			return new DownloadController(
+				$c->query('AppName'),
+				$c->query('Request'),
+				$server->getL10N($c->query('AppName'))
 			);
 		});
 
